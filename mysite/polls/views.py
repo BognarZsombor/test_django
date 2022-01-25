@@ -17,6 +17,8 @@ class DetailView(generic.DetailView):
 
 def index(request):
     if request.method == 'GET':
+        # Filtering question_list with search bar
+        # 'search' 'question_list'
         question_filter = request.GET.get('search')
         if question_filter is None:
             question_list = Question.objects.filter(end_date__gte=timezone.now()).filter(pub_date__lte=timezone.now()).order_by('-end_date')
@@ -28,6 +30,34 @@ def index(request):
         context = { 'question_list': question_list }
 
         return render(request, 'polls/index.html', context)
+    elif request.method == 'POST':
+        # Adding new question to the database
+        # 'question_text' 'pub_date' 'end_date'
+        question_text = request.POST.get('question_text')
+        pub_date = request.POST.get('pub_date')
+        end_date = request.POST.get('end_date')
+        print(pub_date)
+        print(end_date)
+        if question_text and pub_date != "" and end_date != "":
+            question = Question(question_text=question_text, pub_date=pub_date, end_date=end_date)
+            question.save()
+            return HttpResponseRedirect(reverse('polls:index'))
+        elif pub_date == "" and end_date == "":
+            question = Question(question_text=question_text)
+            question.save()
+            return HttpResponseRedirect(reverse('polls:index'))
+        elif pub_date == "":
+            question = Question(question_text=question_text, end_date=end_date)
+            question.save()
+            return HttpResponseRedirect(reverse('polls:index'))
+        elif end_date == "":
+            question = Question(question_text=question_text, pub_date=pub_date)
+            question.save()
+            return HttpResponseRedirect(reverse('polls:index'))
+        else:
+            return render(request, 'polls/index.html', {
+                'error_message': "Error, your question wasn't posted."
+            })
     else:
         search_result = Question.objects.filter(end_date__gte=timezone.now()).filter(pub_date__lte=timezone.now()).order_by('-end_date')
         context = { 'question_list': question_list }
@@ -36,14 +66,24 @@ def index(request):
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    try:
-        selected_choice = question.choice_set.get(pk=request.POST['choice'])
-    except (KeyError, Choice.DoesNotExist):
-        return render(request, 'polls/vote.html', {
-            'question': question,
-            'error_message': "You didn't select a choice."
-        })
-    else:
-        selected_choice.votes += 1
-        selected_choice.save()
-        return HttpResponseRedirect(reverse('polls:detail', args=(question.id,)))
+    if 'choice' in request.content_params:
+        try:
+            selected_choice = question.choice_set.get(pk=request.POST['choice'])
+        except (KeyError, Choice.DoesNotExist):
+            return render(request, 'polls/vote.html', {
+                'question': question,
+                'error_message': "You didn't select a choice."
+            })
+        else:
+            selected_choice.votes += 1
+            selected_choice.save()
+            return HttpResponseRedirect(reverse('polls:detail', args=(question.id,)))
+    elif 'choice_text' in request.content_params:
+        choice_text = request.POST.get('choice_text')
+        if choice_text:
+            question.choice_set.create(choice_text=choice_text)
+            return HttpResponseRedirect(reverse('polls:detail', args=(question.id,)))
+        else:
+            return render(request, 'polls/index.html', {
+                'error_message': "Error, your choice wasn't posted."
+            })

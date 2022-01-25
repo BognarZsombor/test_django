@@ -12,18 +12,24 @@
 <body>
     {% include 'polls/header.html' %}
     <div id="content">
-        <form action="{% url 'polls:vote' question.id %}" method="post">
+        <!--
+            New question creattion form
+            question_text, pub_date, end_date
+        -->
+        <form action="" method="post">
         {% csrf_token %}
         <fieldset>
-            <legend><h1>{{ question.question_text }}</h1></legend>
             {% if error_message %} <p><strong>{{ error_message }}</strong></p> {% endif %}
-            {% for choice in question.choice_set.all %}
-                <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
-            {% endfor %}
-            </fieldset>
-        <input type="submit" value="Vote">
+            <input type="text" name="question_text" id="question_text">
+            <input type="datetime-local" name="pub_date" id="pub_date">
+            <input type="datetime-local" name="end_date" id="end_date">
+            <input type="submit" value="Add">
+        </fieldset>
         </form>
+        <!--
+            Displaying questions
+            question_list
+        -->
         {% for question in question_list %}
             <a href="{% url 'polls:vote' question.id %}">
                 <div class="question_div">
