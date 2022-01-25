@@ -66,7 +66,7 @@ def index(request):
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    if 'choice' in request.content_params:
+    if request.POST.get('choice'):
         try:
             selected_choice = question.choice_set.get(pk=request.POST['choice'])
         except (KeyError, Choice.DoesNotExist):
@@ -78,12 +78,16 @@ def vote(request, question_id):
             selected_choice.votes += 1
             selected_choice.save()
             return HttpResponseRedirect(reverse('polls:detail', args=(question.id,)))
-    elif 'choice_text' in request.content_params:
+    elif request.POST.get('choice_text'):
         choice_text = request.POST.get('choice_text')
         if choice_text:
             question.choice_set.create(choice_text=choice_text)
-            return HttpResponseRedirect(reverse('polls:detail', args=(question.id,)))
+            return HttpResponseRedirect(reverse('polls:vote', args=(question.id,)))
         else:
-            return render(request, 'polls/index.html', {
+            return render(request, 'polls/vote.html', {
                 'error_message': "Error, your choice wasn't posted."
             })
+    else:
+        return render(request, 'polls/vote.html', {
+            'question': question,
+        })
