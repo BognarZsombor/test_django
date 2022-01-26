@@ -1,12 +1,33 @@
 * {
     margin: 0;
     padding: 0;
+    text-decoration: none;
+}
+
+html, body {
+    height: 100%;
+}
+
+link {
+    text-decoration: none;
+}
+
+link:hover {
+    text-decoration: none;
+}
+
+link:active {
+    text-decoration: none;
+}
+
+link:visited {
+    text-decoration: none;
 }
 
 #header {
-    position: sticky;
+    position: fixed;
     width: 100%;
-    height: 120px;
+    height: 80px;
     left: 0px;
     top: 0px;
     
@@ -18,14 +39,14 @@
 #header_title {
     position: absolute;
     width: 412px;
-    height: 122px;
+    height: 80px;
     left: 5%;
     top: 0px;
 
     font-family: 'Red Hat Display', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 72px;
+    font-size: 55px;
     line-height: 95px;
     display: flex;
     align-items: center;
@@ -39,14 +60,30 @@
 #header_search {
     position: absolute;
     width: 363px;
-    height: 65px;
+    height: 40px;
     right: 5%;
-    top: 29px;
+    top: 20px;
 
+    padding-left: 20px;
     background: #D9D9D9;
-    border: 3px solid #A5DBE5;
+    border: 2px solid #A5DBE5;
     box-sizing: border-box;
     border-radius: 10px;
+
+    font-family: 'Red Hat Text', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 32px;
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+}
+
+#header_search:active {
+    background-color: #D9D9D9;
+    border: 2px solid #A5DBE5;
 }
 
 #header_search::placeholder {
@@ -54,12 +91,12 @@
     width: 328px;
     height: 65px;
     left: 20px;
-    top: 15px;
+    top: 2px;
 
     font-family: 'Red Hat Text', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 24px;
+    font-size: 16px;
     line-height: 32px;
     display: flex;
     align-items: center;
@@ -70,7 +107,7 @@
 footer {
     position: sticky;
     width: 100%;
-    height: 120px;
+    height: 80px;
     left: 0px;
     bottom: 0px;
 
@@ -78,12 +115,69 @@ footer {
     mix-blend-mode: normal;
 }
 
-
-
-
-
-
-
 #content {
-    height: 1080px;
+    padding: 80px 0px;
+    min-height: 100%;
+}
+
+.question_div {
+    margin: 50px;
+    width: 60%;
+    height: 80px;
+    left: 0px;
+    top: 0px;
+
+    background: #FFFFFF;
+    border: 5px solid #6EEB83;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.question_text {
+    text-decoration: none;
+    position: relative;
+    width: 426px;
+    height: 80px;
+    left: 2%;
+    top: 25%;
+
+    font-family: 'Red Hat Text', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 32px;
+    color: black;
+}
+
+.question_votes {
+    text-decoration: none;
+    position: relative;
+    width: 124px;
+    height: 81px;
+    left: 30%;
+    top: 25%;
+
+    font-family: 'Red Hat Text', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 32px;
+    color: black;
+}
+
+.question_status {
+    text-decoration: none;
+    position: relative;
+    width: 140px;
+    height: 81px;
+    left: 50%;
+    top: 25%;
+
+    font-family: 'Red Hat Text', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 32px;
+    color: black;
 }

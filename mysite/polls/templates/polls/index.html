@@ -17,33 +17,37 @@
 <body>
     {% include 'polls/header.html' %}
     <div id="content">
-        <!--
-            New question creattion form
-            question_text, pub_date, end_date
-        -->
-        <form action="" method="post">
-        {% csrf_token %}
-        <fieldset>
-            {% if error_message %} <p><strong>{{ error_message }}</strong></p> {% endif %}
-            <input type="text" name="question_text" id="question_text">
-            <input type="datetime-local" name="pub_date" id="pub_date">
-            <input type="datetime-local" name="end_date" id="end_date">
-            <input type="submit" value="Add">
-        </fieldset>
-        </form>
-        <!--
-            Displaying questions
-            question_list
-        -->
-        {% for question in question_list %}
+        <div id="new_question">
+            <!--
+                New question creattion form
+                question_text, pub_date, end_date
+            -->
+            <form action="" method="post">
+            {% csrf_token %}
+            <fieldset>
+                {% if error_message %} <p><strong>{{ error_message }}</strong></p> {% endif %}
+                <input type="text" name="question_text" id="question_text">
+                <input type="datetime-local" name="pub_date" id="pub_date">
+                <input type="datetime-local" name="end_date" id="end_date">
+                <input type="submit" value="Add">
+            </fieldset>
+            </form>
+        </div>
+        <div id="display_questions">
+            <!--
+                Displaying questions
+                question_list
+            -->
+            {% for question in question_list %}
             <a href="{% url 'polls:vote' question.id %}">
                 <div class="question_div">
-                    <span class="question_text">{{ question.question_text }}</span>
-                    <span class="question_votes">{{ question.total_votes }}</span>
-                    <span class="question_votes">{{ question.status }}</span>
+                        <span class="question_text">{{ question.question_text }}</span>
+                        <span class="question_votes">{{ question.total_votes }} votes</span>
+                        <span class="question_status">{{ question.status }}</span>
                 </div>
             </a>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
     {% include 'polls/footer.html' %}
 </body>
