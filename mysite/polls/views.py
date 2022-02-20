@@ -1,3 +1,5 @@
+from itertools import cycle, islice
+
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.shortcuts import render, get_object_or_404
@@ -22,7 +24,11 @@ def index(request):
         question_filter = request.GET.get('search')
         if question_filter is None:
             question_list = Question.objects.filter(end_date__gte=timezone.now()).filter(pub_date__lte=timezone.now()).order_by('-end_date')
-            context = { 'question_list': question_list }
+            question_colors = list(islice(cycle(['#6EEB83', '#1BE7FF', '#FFB800', '#FF5714']), len(question_list)))
+            zipped_list = zip(question_list, question_colors)
+            context = {
+                'zipped_list': zipped_list
+            }
 
             return render(request, 'polls/index.html', context)
         

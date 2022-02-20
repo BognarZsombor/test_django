@@ -38,14 +38,20 @@
                 Displaying questions
                 question_list
             -->
-            {% for question in question_list %}
-            <a href="{% url 'polls:vote' question.id %}">
-                <div class="question_div">
-                        <span class="question_text">{{ question.question_text }}</span>
+            {% for question, color in zipped_list %}
+            <div class="question_div" style="border: 5px solid {{ color }}">
+                <a href="{% url 'polls:vote' question.id %}">
+                    <div class="question_top">
+                        <span class="question_text" style="background-color: ;">{{ question.question_text }}</span>
                         <span class="question_votes">{{ question.total_votes }} votes</span>
                         <span class="question_status">{{ question.status }}</span>
-                </div>
-            </a>
+                    </div>
+                    <div class="question_bottom">
+                        <span class="question_pub_date">Created at {{ question.pub_date }}</span>
+                        <span class="question_end_date">Ending at {{ question.end_date }}</span>
+                    </div>
+                </a>
+            </div>
             {% endfor %}
         </div>
     </div>

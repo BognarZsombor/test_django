@@ -1,6 +1,6 @@
 <header>
     <div id="header">
-        <h1 id="header_title">My Polls</h1>
+        <a href="{% url 'polls:index' %}"><h1 id="header_title">My Polls</h1></a>
         <form action="{% url 'polls:index' %}" method="get">
             <input type="text" name="search" id="header_search" placeholder="Search question">
         </form>

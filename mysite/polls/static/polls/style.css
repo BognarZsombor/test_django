@@ -31,7 +31,7 @@ link:visited {
     left: 0px;
     top: 0px;
     
-    background: #D9D9D9;
+    /*background: #D9D9D9;*/
     mix-blend-mode: normal;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
@@ -65,7 +65,7 @@ link:visited {
     top: 20px;
 
     padding-left: 20px;
-    background: #D9D9D9;
+    /*background: #D9D9D9;*/
     border: 2px solid #A5DBE5;
     box-sizing: border-box;
     border-radius: 10px;
@@ -128,24 +128,55 @@ footer {
     top: 0px;
 
     background: #FFFFFF;
-    border: 5px solid #6EEB83;
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
+}
+
+.question_top {
+    height: 100%;
+}
+
+.question_bottom {
+    display: none;
+}
+
+.question_div:hover {
+    margin: 50px;
+    width: 60%;
+    height: 142px;
+    left: 0px;
+    top: 0px;
+
+    background: #FFFFFF;
+    border: 5px solid #1BE7FF;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.question_div:hover .question_bottom {
+    display: block;
+    height: 50%;
+}
+
+.question_div:hover .question_top {
+    display: block;
+    height: 50%;
 }
 
 .question_text {
     text-decoration: none;
     position: relative;
     width: 426px;
-    height: 80px;
+    height: 100%;
     left: 2%;
     top: 25%;
 
     font-family: 'Red Hat Text', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 32px;
     color: black;
 }
@@ -154,14 +185,14 @@ footer {
     text-decoration: none;
     position: relative;
     width: 124px;
-    height: 81px;
+    height: 100%;
     left: 30%;
     top: 25%;
 
     font-family: 'Red Hat Text', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 32px;
     color: black;
 }
@@ -170,14 +201,48 @@ footer {
     text-decoration: none;
     position: relative;
     width: 140px;
-    height: 81px;
+    height: 100%;
     left: 50%;
     top: 25%;
 
     font-family: 'Red Hat Text', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 32px;
     color: black;
+}
+
+.question_pub_date {
+    text-decoration: none;
+    position: relative;
+    width: 140px;
+    height: 100%;
+    left: 2%;
+    top: 25%;
+
+    font-family: 'Red Hat Text', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 24px;
+
+    color: #858585;
+}
+
+.question_end_date {
+    text-decoration: none;
+    position: relative;
+    width: 140px;
+    height: 100%;
+    left: 50%;
+    top: 25%;
+
+    font-family: 'Red Hat Text', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 24px;
+
+    color: #858585;
 }
